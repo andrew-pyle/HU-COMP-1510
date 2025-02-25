@@ -1,13 +1,13 @@
-<div style="display: flex; gap: 10px; align-content: center;">
+<div style="display: flex; gap: 10px; justify-content: center">
     {%- if page.prev -%}
-        <a href="{{ page.prev }}">Previous</a>
+    <a href="{{ page.prev }}">← Previous</a>
     {%- else -%}
-        <i>None</i>
+    <i>None</i>
     {%- endif -%}
-        <span>Navigation</span>
+    <span>Navigation</span>
     {%- if page.next -%}
-        <a href="{{ page.next }}">Next</a>
+    <a href="{{ page.next }}">Next →</a>
     {%- else -%}
-        <i>None</i>
+    <i>None</i>
     {%- endif -%}
 </div>

@@ -8,7 +8,7 @@ next: structs
 
 # File Input/Output
 
-> Input/Output is usually stylized as I/O or IO.
+_Input/Output is usually stylized as I/O or IO_
 
 The concept of:
 

@@ -1,6 +1,6 @@
 ---
 layout: base
-next: streams
+next: files
 ---
 
 {%- include navigation.html -%}
