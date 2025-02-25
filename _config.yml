@@ -12,3 +12,9 @@ titles_from_headings:
   collections: true
 header_pages:
   - module-3.md
+collections:
+  notes:
+    output: true
+    order:
+      - streams.md
+      - files.md
