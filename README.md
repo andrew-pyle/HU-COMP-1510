@@ -1,8 +1,8 @@
-# HU COMP 1510
+# COMP 1510
 
-**Harding University**
+**Harding University** — Andrew Pyle
 
-Instructor: Andrew Pyle
+Class Materials for Introductory Programming in C++ at Harding University
 
 ## Notes
 
