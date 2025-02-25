@@ -1,17 +1,9 @@
-# COMP 1510
+# Class Notes
 
 **Harding University** — Andrew Pyle
 
-Class Materials for Introductory Programming in C++ at Harding University
+Class Materials for Courses at Harding University
 
-## Notes
+## Classes
 
-1. [Arrays](arrays.md)
-1. [C Strings](c-strings.md)
-1. [C++ Strings](c++-strings.md)
-1. [Streams](streams.md)
-1. [Files](files.md)
-1. [Structs](structs.md)
-1. [Classes](classes.md)
-1. [Objects](objects.md)
-1. [Pointers](pointers.md)
+- [COMP 1510](comp-1510.md)

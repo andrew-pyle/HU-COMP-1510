@@ -8,7 +8,8 @@ url: https://andrew-pyle.github.io
 remote_theme: jekyll/minima
 minima:
   skin: dark
-header_pages: []
+header_pages:
+  - comp-1510.md
 titles_from_headings:
   enabled: true
   strip_title: true
