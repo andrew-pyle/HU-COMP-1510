@@ -1,4 +1,5 @@
 ---
+layout: base
 prev: streams.md
 next: structs.md
 ---

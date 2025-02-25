@@ -1,4 +1,5 @@
 ---
+layout: base
 next: streams.md
 ---
 
