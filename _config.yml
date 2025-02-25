@@ -1,4 +1,4 @@
-title: COMP 1510
+title: Class Notes
 author: Andrew Pyle
 organization: Harding University
 email: apyle@harding.edu
@@ -8,6 +8,7 @@ url: https://andrew-pyle.github.io
 remote_theme: jekyll/minima
 minima:
   skin: dark
+header_pages: []
 titles_from_headings:
   enabled: true
   strip_title: true
