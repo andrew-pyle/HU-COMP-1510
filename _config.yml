@@ -1,0 +1,8 @@
+title: HU COMP 1510
+author: Andrew Pyle
+organization: Harding University
+email: apyle@harding.edu
+description: Class Materials for Harding University Introductory Programming in C++
+theme: minima
+minima:
+  skin: dark
