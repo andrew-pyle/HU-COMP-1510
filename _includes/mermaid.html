@@ -1,13 +1,8 @@
 <script type="module">
-  // Extract contents of <code class="language-mermaid"> into <pre class="mermaid">
-  // Source: https://css-tricks.com/making-mermaid-diagrams-in-markdown/
-  for (let element of document.querySelectorAll(
-    "pre.mermaid, pre>code.language-mermaid"
-  )) {
-    if (element.tagName === "CODE") {
-      element = element.parentElement;
-    }
-    element.outerHTML = /*html*/ `<div class="mermaid">${element.textContent}</div>`;
+  // Add class to trigger mermaid processing
+  // Source: https://github.com/orgs/community/discussions/65040#discussioncomment-12192375
+  for (const element of document.querySelectorAll(".language-mermaid")) {
+    element.classList.add("mermaid");
   }
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ startOnLoad: true });
