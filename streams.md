@@ -1,7 +1,9 @@
 ---
 layout: base
-next: streams.md
+next: streams
 ---
+
+{%- include navigation.html -%}
 
 # Streams
 

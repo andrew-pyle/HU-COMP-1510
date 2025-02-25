@@ -1,12 +1,17 @@
 # HU COMP 1510
 
-## Table of Contents
+**Harding University**
 
-1. Module 1 — Arrays
-1. Module 2 — C Strings
-1. [Module 3 — Streams & File IO](module-3)
-   - [Streams](module-3/streams.md)
-   - [Files](module-3/files.md)
-1. Module 4 — Classes I
-1. Module 5 — Classes II
-1. Module 6 — Structs & Pointers
+Instructor: Andrew Pyle
+
+## Notes
+
+1. [Arrays](arrays.md)
+1. [C Strings](c-strings.md)
+1. [C++ Strings](c++-strings.md)
+1. [Streams](streams.md)
+1. [Files](files.md)
+1. [Structs](structs.md)
+1. [Classes](classes.md)
+1. [Objects](objects.md)
+1. [Pointers](pointers.md)

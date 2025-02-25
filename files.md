@@ -1,8 +1,10 @@
 ---
 layout: base
-prev: streams.md
-next: structs.md
+prev: streams
+next: structs
 ---
+
+{%- include navigation.html -%}
 
 # File Input/Output
 
