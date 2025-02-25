@@ -6,11 +6,6 @@ description: Class Materials for Harding University Introductory Programming in 
 remote_theme: jekyll/minima
 minima:
   skin: dark
-plugins:
-  - jekyll-readme-index
-  - jekyll-titles-from-headings
-  - jekyll-relative-links
-  - jekyll-mermaid
 titles_from_headings:
   enabled: true
   strip_title: true
