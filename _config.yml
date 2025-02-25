@@ -14,3 +14,5 @@ titles_from_headings:
   enabled: true
   strip_title: true
   collections: true
+header_pages:
+  - module-3.md
