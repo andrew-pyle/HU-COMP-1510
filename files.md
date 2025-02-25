@@ -8,7 +8,6 @@ next: structs
 
 # File Input/Output
 
-_Input/Output is usually stylized as I/O or IO_
 
 The concept of:
 
@@ -22,6 +21,8 @@ We can send and receive information from many sources:
 - Files
 - Databases
 - etc.
+
+_Input/Output is usually stylized as I/O or IO_
 
 ## File IO
 
