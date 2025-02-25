@@ -6,5 +6,3 @@ description: Class Materials for Harding University Introductory Programming in 
 remote_theme: jekyll/minima
 minima:
   skin: dark
-baseurl: "/harding/comp-1510"
-url: "https://slides.andrewpyle.dev"
