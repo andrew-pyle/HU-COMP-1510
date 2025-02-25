@@ -1,5 +1,5 @@
 ---
-marp: true
+next: streams.md
 ---
 
 # Streams

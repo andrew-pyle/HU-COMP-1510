@@ -1,4 +1,6 @@
 ---
+prev: streams.md
+next: structs.md
 ---
 
 # File Input/Output
