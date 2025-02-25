@@ -222,8 +222,6 @@ while(!pokemonFS.fail()) {
 }
 ```
 
----
-
 ### Errors
 
 There are several errors which can happen when reading from a file stream.
