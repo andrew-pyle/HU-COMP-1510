@@ -4,8 +4,8 @@ layout: base
 
 <article class="post">
     <header class="post-header">
-        <!-- <h1 class="post-title">{{ page.title | escape }}</h1> -->
-        {%- include navigation.html -%}
+        <h1 class="post-title">{{ page.title | escape }}</h1>
+        {%- if page.next or page.prev include navigation.html -%}
     </header>
 
     <div class="post-content">{{ content }}</div>
