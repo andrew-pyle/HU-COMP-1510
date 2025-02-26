@@ -3,8 +3,6 @@ layout: base
 next: files
 ---
 
-{%- include navigation.html -%}
-
 # Streams
 
 ---

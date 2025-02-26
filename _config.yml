@@ -1,8 +1,8 @@
 title: Class Notes
-author: Andrew Pyle
-organization: Harding University
-email: apyle@harding.edu
-description: Class Materials for Introductory Programming in C++ at Harding University
+author:
+  name: Andrew Pyle
+  email: apyle@harding.edu
+description: Course Materials
 baseurl: /HU-COMP-1510/
 url: https://andrew-pyle.github.io
 remote_theme: jekyll/minima

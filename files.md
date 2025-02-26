@@ -4,8 +4,6 @@ prev: streams
 next: structs
 ---
 
-{%- include navigation.html -%}
-
 # File Input/Output
 
 
