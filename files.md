@@ -226,17 +226,92 @@ while(!pokemonFS.fail()) {
 }
 ```
 
-### Errors
+## Writing a Text File
 
-There are several errors which can happen when reading from a file stream.
+Let's extend the program above to copy the text input file, adding line numbers. Use the insertion operator `<<` to insert into an `ofstream`.
+
+`pokemon.txt`
+
+```txt
+Bulbasaur
+Charmander
+Squirtle
+```
+
+`main.cpp`
+
+```cpp
+#include <fstream>
+using namespace std;
+
+int main() {
+    ifstream fin;
+    ofstream fout; // Open the output file, too
+
+    // Open both files by filename
+    fin.open("pokemon.txt");              // input file
+    fout.open("pokemon-with-numbers.txt"); // output file
+
+    string line;
+    int number = 0;
+    // Read each line of the input file
+    while (getline(fin, line)) {
+        number += 1;
+        fout << number << ". " << line << endl;
+    }
+
+    // Close both files
+    fin.close();  // input file
+    fout.close(); // output file
+}
+```
+
+### Write Modes
+
+By default, writing to an `ofstream` will overwrite the contents of the file. We can change that behavior by providing a second argument to the open method.
+
+```cpp
+// Overwrite contents
+fout.open("filename.txt");
+```
+
+```cpp
+// Append each write
+fout.open("filename.txt", ios::app);
+```
+
+#### Exercise
+Extend the Program above to append the contents of `pokemon-chunk.txt` to the output file. **Note:** Each time we run the code, the contents of `pokemon-chunk.txt` will be appended again.
+
+What will be the expected output, given the following files?
+`pokemon.txt`
+```txt
+Bulbasaur
+Charmander
+Squirtle
+```
+
+`pokemon-chunk.txt`
+```txt
+Caterpie
+Metapod
+```
+
+What will be the expected output if we run the code again?
+
+
+## Errors
+
+There are several errors which can happen when working with file streams.
 
 ### Summary
 
-| Problem                | Solution                            |
-| ---------------------- | ----------------------------------- |
-| Nonexistent File       | `.is_open()`                        |
-| Improper Variable Type | Don't make mistakes ☹️              |
-| Reading Past EOF       | Stop reading when `.fail() == true` |
+| Problem                   | Solution                                      |
+| ------------------------- | --------------------------------------------- |
+| Nonexistent File          | `.is_open()`                                  |
+| Improper Variable Type    | Don't make mistakes ☹️                        |
+| Reading Past EOF          | Stop reading when `.fail() == true`           |
+| Overwriting Existing File | Detect whether the file exists before writing |
 
 ### **Problem:** Opening a file which does not exist.
 
@@ -352,42 +427,37 @@ string line;
 while(pokemonFS >> line) { /* ... */ }
 ```
 
-## Writing a Text File
+### **Problem:** Accidentally Overwriting an existing File
 
-Let's extend the program above to copy the text input file, adding line numbers.
+#### Fix
 
-`pokemon.txt`
+A programmer can detect whether a given file exists by attempting to read the file, then checking `.fail()`.
 
-```txt
-Bulbasaur
-Charmander
-Squirtle
-```
+#### Example
 
-`main.cpp`
+_To Do_
+
+## `ifstream` & `ofstream` in Functions
+
+File streams can be passed into functions as arguments. This is useful for _abstracting_ logic into a function for reuse.
+
+For instance, we may want to create a function to parse TSV files. The file is always in the same format, so there's no need to write the same code over and over. We can reuse the same logic, given a specific file.
+
+### Example
 
 ```cpp
-#include <fstream>
-using namespace std;
-
-int main() {
-    ifstream fin;
-    ofstream fout; // Open the output file, too
-
-    // Open both files by filename
-    fin.open("pokemon.txt");              // input file
-    fout.open("pokemon-with-numbers.txt"); // output file
-
+vector<vector<string>> parse_tsv(ifstream &fin) {
+    vector<vector<string>> out;
     string line;
-    int number = 0;
-    // Read each line of the input file
-    while (getline(fin, line)) {
-        number += 1;
-        fout << number << ". " << line << endl;
-    }
 
-    // Close both files
-    fin.close();  // input file
-    fout.close(); // output file
+    while (getline(fin, line)) { /* ... */ }
+
+    return lines;
 }
+
+// Returns
+// { { "a", "b" }
+//   { "c", "d" }
+//   ...
+//   { "e", "f" } }
 ```
