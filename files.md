@@ -166,7 +166,7 @@ int main() {
 }
 ```
 
-### Choosing the "Chunk"
+### Choosing the “Chunk”
 
 ```cpp
 fileFS >> line        // reads until next whitespace
@@ -345,9 +345,49 @@ pokemonFS >> squirtle;
 pokemonFS >> caterpie; // ❌ No 4th chunk!
 ```
 
-Fixed by looping until end-of-file using implicit conversion of stream to boolean.
+Fixed by looping until end-of-file
 
 ```cpp
 string line;
 while(pokemonFS >> line) { /* ... */ }
+```
+
+## Writing a Text File
+
+Let's extend the program above to copy the text input file, adding line numbers.
+
+`pokemon.txt`
+
+```txt
+Bulbasaur
+Charmander
+Squirtle
+```
+
+`main.cpp`
+
+```cpp
+#include <fstream>
+using namespace std;
+
+int main() {
+    ifstream fin;
+    ofstream fout; // Open the output file, too
+
+    // Open both files by filename
+    fin.open("pokemon.txt");              // input file
+    fout.open("pokemon-with-numbers.txt"); // output file
+
+    string line;
+    int number = 0;
+    // Read each line of the input file
+    while (getline(fin, line)) {
+        number += 1;
+        fout << number << ". " << line << endl;
+    }
+
+    // Close both files
+    fin.close();  // input file
+    fout.close(); // output file
+}
 ```
