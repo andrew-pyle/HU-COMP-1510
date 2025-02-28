@@ -417,7 +417,7 @@ A(Code)
 B(Buffer)
 O((Open))
 O-- Creates -->B
-B-- Refills When Empty -->F
+F-- Refills When Empty -->B
 B-- Read -->A
 ```
 
