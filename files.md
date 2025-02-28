@@ -6,6 +6,10 @@ next: structs
 
 # File Input/Output
 
+## What is IO?
+
+_Input/Output is usually stylized as I/O or IO_
+
 The concept of:
 
 - Sending information from inside our program to an outside system
@@ -19,7 +23,63 @@ We can send and receive information from many sources:
 - Databases
 - etc.
 
-_Input/Output is usually stylized as I/O or IO_
+## Files
+
+Files are units of data stored in the computer's file system. Files exist in most operating systems.
+
+The concept of a file is based on the metaphor of a file cabinet. A file cabinet has folders which contain pieces of paper (files). The pieces of paper have writing on them (data).
+
+Files have **data** and **attributes**.
+
+### Data
+
+Files contain a sequence of bytes, like `11011001 11011001 11011001 ...`. This is their data.
+
+![Illustration of a File](images/file.svg)
+
+### Attributes
+
+| Attribute     | Description                                                                                                                                 | Example                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Filename      | The unique identifier of the file. Usually has an **extension** indicating the type of data the file contains.                              | pokemon.txt                                          |
+| Size          | The number of bytes in the file                                                                                                             | 1,024 bytes                                          |
+| Last Modified | The operating system keeps track of the date when the file was most recently changed                                                        | 28 Feb 2025 10:09 AM                                 |
+| Permissions   | The operating system can allow only certain **users** or **processes** from accessing a file. Certain **operations** can be restricted too. | Allowed Users: admins; Allowed Operations: read-only |
+
+### Binary vs. Text Files
+
+There are two main types of files: binary and text files.
+
+#### Binary
+
+The contents of binary files are just their bytes, as-is. These files are not human-readable. Opening them in a text editor will result in meaningless characters.
+
+![illustration of a binary file](images/binary-file.svg)
+
+##### Binary File Examples
+
+| Category                | File types                    |
+| ----------------------- | ----------------------------- |
+| Images                  | `.jpg`, `.png`                |
+| Audio                   | `.mp3`, `wav`                 |
+| Video                   | `.mp4` `.mov`                 |
+| Executable Machine Code | `.exe`, `.o`, or no extension |
+
+#### Text File
+
+The contents of a text file represent characters, according to an **encoding**, like ASCII or UTF-8. These files are human-readable. Opening a text file in a text editor will result in human-readable characters, because the text editor applies the encoding, transforming the bytes into characters.
+
+![illustration of a text file](images/text-file.svg)
+
+##### Text File Examples
+
+| Category        | File types |
+| --------------- | ---------- |
+| XML             | `.xml`     |
+| JSON            | `.json`    |
+| Tab-Delimited   | `.tsv`     |
+| Comma-Delimited | `.csv`     |
+| Unstructured    | `.txt`     |
 
 ## File IO
 

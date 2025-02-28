@@ -40,7 +40,7 @@ Is the programmer in control of flushes? _No_
 
 Affect how the insertion `<<` and extraction `>>` operators work.
 
-Manipulators work by overloading the `<<` &`>>` operators.
+Manipulators work by overloading the `<<` & `>>` operators.
 
 ### Decimal Manipulators
 
