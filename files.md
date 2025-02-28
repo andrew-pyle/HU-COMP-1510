@@ -375,11 +375,24 @@ What will be the expected output if we run the code again?
 
 File streams can be passed into functions as arguments. This is useful for _abstracting_ logic into a function for reuse.
 
-For instance, we may want to create a function to parse TSV files. The file is always in the same format, so there's no need to write the same code over and over. We can reuse the same logic, given a specific file.
+File streams must be passed by **reference.**
 
-### Example
+Why?
+`ifstream` & `ofstream` are [not copyable](https://cplusplus.com/reference/fstream/ifstream/ifstream/) because streams are intended to exist once and be shared throughout your code. Passing by value would require making a copy.
 
-_To-Do_
+### Syntax
+
+```cpp
+// Adds all numbers in the file stream
+int sum(ifstream &fin) {
+    int num;
+    int sum = 0;
+    while (fin >> num) {
+        sum += num;
+    }
+    return sum;
+}
+```
 
 ## Errors
 
@@ -584,4 +597,42 @@ int main()
 
     cout << "Found " << count << ' ' << SEARCH_TYPE << "-type Pokémon" << endl;
 }
+```
+
+## Buffers
+
+### Reading
+
+- Opening the file creates a buffer & fills it up with the first chunk of the file
+- Reading moves the data from the buffer to the destination in your code
+- The buffer "automatically" refills itself when it needs to supply more data but it is already empty.
+
+```mermaid
+flowchart LR
+
+C@{shape: docs, label: File System}
+A(Code)
+B(Buffer)
+O((Open))
+O-- Creates -->B
+C-- Refills When Empty -->B
+B-- Read -->A
+```
+
+### Writing
+
+- Opening the file for writing creates an empty buffer
+- Writing streams data from your code into the buffer
+- The Buffer is written to disk each time it becomes full. Closing the file writes the remaining contents of the buffer to disk, if any.
+
+```mermaid
+flowchart LR
+C@{shape: docs, label: File System}
+B(Buffer)
+O((Open))
+A(Code)
+
+O -- Creates -->B
+B-- Writes When Full -->C
+A-- Write -->B
 ```
