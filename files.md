@@ -6,7 +6,6 @@ next: structs
 
 # File Input/Output
 
-
 The concept of:
 
 - Sending information from inside our program to an outside system
@@ -281,10 +280,12 @@ fout.open("filename.txt", ios::app);
 ```
 
 #### Exercise
+
 Extend the Program above to append the contents of `pokemon-chunk.txt` to the output file. **Note:** Each time we run the code, the contents of `pokemon-chunk.txt` will be appended again.
 
 What will be the expected output, given the following files?
 `pokemon.txt`
+
 ```txt
 Bulbasaur
 Charmander
@@ -292,6 +293,7 @@ Squirtle
 ```
 
 `pokemon-chunk.txt`
+
 ```txt
 Caterpie
 Metapod
@@ -299,6 +301,15 @@ Metapod
 
 What will be the expected output if we run the code again?
 
+## `ifstream` & `ofstream` in Functions
+
+File streams can be passed into functions as arguments. This is useful for _abstracting_ logic into a function for reuse.
+
+For instance, we may want to create a function to parse TSV files. The file is always in the same format, so there's no need to write the same code over and over. We can reuse the same logic, given a specific file.
+
+### Example
+
+_To-Do_
 
 ## Errors
 
@@ -313,13 +324,9 @@ There are several errors which can happen when working with file streams.
 | Reading Past EOF          | Stop reading when `.fail() == true`           |
 | Overwriting Existing File | Detect whether the file exists before writing |
 
-### **Problem:** Opening a file which does not exist.
+### **Problem:** Opening a file which does not exist
 
-#### Fix
-
-File with the provided name might not exist, or the code may be denied access. Check that the file is open with `.is_open()` before reading.
-
-#### Example
+A file with the provided name might not exist, or the code may be denied access. Check that the file is open with `.is_open()` before reading.
 
 ```cpp
 ifstream pokemonFS;
@@ -359,13 +366,9 @@ while (pokemonFS >> line) {
 }
 ```
 
-### **Problem:** Assigning data to a variable which cannot hold the data.
+### **Problem:** Assigning data to a variable which cannot hold the data
 
-#### Fix
-
-Program correctly. ☹️ (Tests are the real answer.)
-
-#### Example
+If we assign content to a variable which cannot hold it, there will be an error.
 
 ```cpp
 ifstream fin;
@@ -389,11 +392,9 @@ while (getline(fin, line)) {
 }
 ```
 
-### **Problem:** Trying to read when there is nothing left.
+### **Problem:** Trying to read when there is nothing left
 
-#### Fix
-
-Stop reading at the end-of-file. Use an idiom which handles EOF and errors. See discussion above.
+If we attempt to read when there is nothing to read, logic errors will result. We must check if the read was successful each time, before using the data. Stop reading at the end-of-file. Use an idiom which handles EOF and errors. See discussion above.
 
 #### Example
 
@@ -429,35 +430,88 @@ while(pokemonFS >> line) { /* ... */ }
 
 ### **Problem:** Accidentally Overwriting an existing File
 
-#### Fix
-
-A programmer can detect whether a given file exists by attempting to read the file, then checking `.fail()`.
+Writing to a file will overwrite any existing file with the same name. A programmer can detect whether a given already file exists by attempting to read the file, then checking `.fail()`.
 
 #### Example
 
 _To Do_
 
-## `ifstream` & `ofstream` in Functions
+## Example Programs
 
-File streams can be passed into functions as arguments. This is useful for _abstracting_ logic into a function for reuse.
+### Read a TSV File
 
-For instance, we may want to create a function to parse TSV files. The file is always in the same format, so there's no need to write the same code over and over. We can reuse the same logic, given a specific file.
-
-### Example
+```txt
+Number	Name	Type
+1	Bulbasaur	Grass/Poison
+2	Ivysaur	Grass/Poison
+3	Venusaur	Grass/Poison
+4	Charmander	Fire
+5	Charmeleon	Fire
+6	Charizard	Fire/Flying
+7	Squirtle	Water
+8	Wartortle	Water
+9	Blastoise	Water
+10	Caterpie	Bug
+11	Metapod	Bug
+12	Butterfree	Bug/Flying
+```
 
 ```cpp
-vector<vector<string>> parse_tsv(ifstream &fin) {
-    vector<vector<string>> out;
-    string line;
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iostream>
+using namespace std;
 
-    while (getline(fin, line)) { /* ... */ }
+vector<string> parse_tsv_row(string &row, char separator = '\t')
+{
+    vector<string> out;
+    int start = 0;
+    int found = 0;
+    while (found != -1)
+    {
+        found = row.find(separator, start);
+        string column = row.substr(start, found - start);
+        start = found + 1;
 
-    return lines;
+        out.push_back(column);
+    }
+    return out;
 }
 
-// Returns
-// { { "a", "b" }
-//   { "c", "d" }
-//   ...
-//   { "e", "f" } }
+const string TSV_FILENAME = "pokemon.tsv";
+const string SEARCH_TYPE = "Fire";
+const int TSV_INDEX_FOR_TYPE = 2;
+
+int main()
+{
+    ifstream fin;
+    string line;
+
+    // Output
+    int count = 0;
+
+    // Open file
+    fin.open(TSV_FILENAME);
+
+    // Discard Titles row
+    getline(fin, line);
+
+    // Count each row where type is "grass"
+    while (getline(fin, line))
+    {
+        // Parse Each TSV Row
+        vector<string> data = parse_tsv_row(line);
+
+        // Access "Type" column
+        string type = data.at(TSV_INDEX_FOR_TYPE);
+        // Determine if the Pokémon has the type we are searching for
+        if (type.find(SEARCH_TYPE) != -1)
+        {
+            count += 1;
+        }
+    }
+
+    cout << "Found " << count << ' ' << SEARCH_TYPE << "-type Pokémon" << endl;
+}
 ```
