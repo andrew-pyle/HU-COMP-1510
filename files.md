@@ -146,27 +146,29 @@ int main() {
 }
 ```
 
-## Quiz
+### Quiz
 
-> Which stream can work with the operating system IO?
->
-> `cin` & `cout`
+1. Which stream can work with the operating system IO?
 
-> Which streams can work with file IO?
->
-> `ifstream` & `ofstream`
+   Answer: `cin` & `cout`
 
-> Which manipulators can affect the `cin` & `cout` streams?
->
-> - Make tables with `setw(n)`,`left`,`right`,`setfill(c)`
-> - Format Decimals with `setprecision(n)`,`fixed`,`scientific`,`showpoint`
-> - Affect the Buffer with `endl`,`flush`
+1. Which streams can work with file IO?
 
-> Which manipulators can affect the `ifstream` & `ofstream` streams?
->
-> _The same ones!_
->
-> This is a benefit of the stream concept. The same techniques can be shared among different streams, reusing your existing knowledge.
+   Answer: `ifstream` & `ofstream`
+
+1. Which manipulators can affect the `cin` & `cout` streams?
+
+   Answer:
+
+   - Make tables with `setw(n)`,`left`,`right`,`setfill(c)`
+   - Format Decimals with `setprecision(n)`,`fixed`,`scientific`,`showpoint`
+   - Affect the Buffer with `endl`,`flush`
+
+1. Which manipulators can affect the `ifstream` & `ofstream` streams?
+
+   Answer: _The same ones!_
+
+   This is a benefit of the stream concept. The same techniques can be shared among different streams, reusing your existing knowledge.
 
 ## Reading & Writing Files
 
@@ -197,7 +199,7 @@ int main() {
 
 [zyBook Table 10.3.1: Stream error state flags and functions to check error state](https://learn.zybooks.com/zybook/HARDINGCOMP1510McCownSpring2025/chapter/10/section/3?content_resource_id=108375069)
 
-### Idiom to Read a File
+## Reading a Text File
 
 Read pokemon.txt into a `vector<string>`
 
@@ -349,7 +351,7 @@ fout.open("filename.txt");
 fout.open("filename.txt", ios::app);
 ```
 
-#### Exercise
+#### Append to File Exercise
 
 Extend the Program above to append the contents of `pokemon-chunk.txt` to the output file. **Note:** Each time we run the code, the contents of `pokemon-chunk.txt` will be appended again.
 
@@ -392,6 +394,49 @@ int sum(ifstream &fin) {
     }
     return sum;
 }
+```
+
+## Buffers
+
+Writing and reading files in the underlying operating system is slow. File streams increase utilizing a buffer to batch the reads and writes made by our code. This has two benefits:
+
+1. Increased read & write speed
+1. Increased disk life. Each write to the file system is one step closer to the disk wearing out.
+
+### Reading
+
+- Opening the file creates a buffer & fills it up with the first chunk of the file.
+- Reading moves the data from the buffer to the destination in your code.
+- The buffer "automatically" refills itself when it needs to supply more data but it is already empty.
+
+```mermaid
+flowchart LR
+
+F@{shape: docs, label: File System}
+A(Code)
+B(Buffer)
+O((Open))
+O-- Creates -->B
+B-- Refills When Empty -->F
+B-- Read -->A
+```
+
+### Writing
+
+- Opening the file for writing creates an empty buffer.
+- Writing streams data from your code into the buffer.
+- The Buffer is written to disk each time it becomes full. Closing the file writes the remaining contents of the buffer to disk, if any.
+
+```mermaid
+flowchart LR
+F@{shape: docs, label: File System}
+B(Buffer)
+O((Open))
+A(Code)
+
+O -- Creates -->B
+B-- Writes When Full -->F
+A-- Write -->B
 ```
 
 ## Errors
@@ -467,10 +512,10 @@ Fixed by storing into a variable with the right type.
 
 ```cpp
 ifstream fin;
-string line;
+int num;
 
-// ✅ getline() returns a string, which can be assigned to line
-while (getline(fin, line)) {
+// ✅ The Extraction operator can convert the characters into an `int`
+while (fin >> num) {
     //...
 }
 ```
@@ -519,7 +564,7 @@ Writing to a file will overwrite any existing file with the same name. A program
 
 _To Do_
 
-## Example Programs
+## Appendix: Example Programs
 
 ### Read a TSV File
 
@@ -597,42 +642,4 @@ int main()
 
     cout << "Found " << count << ' ' << SEARCH_TYPE << "-type Pokémon" << endl;
 }
-```
-
-## Buffers
-
-### Reading
-
-- Opening the file creates a buffer & fills it up with the first chunk of the file
-- Reading moves the data from the buffer to the destination in your code
-- The buffer "automatically" refills itself when it needs to supply more data but it is already empty.
-
-```mermaid
-flowchart LR
-
-C@{shape: docs, label: File System}
-A(Code)
-B(Buffer)
-O((Open))
-O-- Creates -->B
-C-- Refills When Empty -->B
-B-- Read -->A
-```
-
-### Writing
-
-- Opening the file for writing creates an empty buffer
-- Writing streams data from your code into the buffer
-- The Buffer is written to disk each time it becomes full. Closing the file writes the remaining contents of the buffer to disk, if any.
-
-```mermaid
-flowchart LR
-C@{shape: docs, label: File System}
-B(Buffer)
-O((Open))
-A(Code)
-
-O -- Creates -->B
-B-- Writes When Full -->C
-A-- Write -->B
 ```
