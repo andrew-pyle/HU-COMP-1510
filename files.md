@@ -35,7 +35,12 @@ Files have **data** and **attributes**.
 
 Files contain a sequence of bytes, like `11011001 11011001 11011001 ...`. This is their data.
 
-![Illustration of a File](images/file.svg)
+```mermaid
+flowchart LR
+    A@{ shape: card, label: "**File**
+        10110110 10110100 11110001 10111101 11110001 10001001 10110100 11110001 10001001 10110110 10110100 10001001 10110110 10110100 11110001 10110110 10111101 11110001
+    " }
+```
 
 ### Attributes
 
@@ -54,7 +59,12 @@ There are two main types of files: binary and text files.
 
 The contents of binary files are just their bytes, as-is. These files are not human-readable. Opening them in a text editor will result in meaningless characters.
 
-![illustration of a binary file](images/binary-file.svg)
+```mermaid
+flowchart LR
+    A@{ shape: card, label: "**Binary File**
+        10110110 10110100 11110001 10111101 11110001 10001001 10110100 11110001 10001001 10110110 10110100 10001001 10110110 10110100 11110001 10110110 10111101 11110001
+    " }
+```
 
 ##### Binary File Examples
 
