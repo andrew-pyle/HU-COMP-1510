@@ -33,12 +33,16 @@ Files have **data** and **attributes**.
 
 ### Data
 
-Files contain a sequence of bytes, like `11011001 11011001 11011001 ...`. This is their data.
+Files contain a sequence of bytes, like `01000001 01110000 01110000 ...`. This is their data.
 
 ```mermaid
 flowchart LR
     A@{ shape: card, label: "**File**
-        10110110 10110100 11110001 10111101 11110001 10001001 10110100 11110001 10001001 10110110 10110100 10001001 10110110 10110100 11110001 10110110 10111101 11110001
+        01000001 01110000 01110000 01101100
+        01100101 01110011 00100000 01100001
+        01110010 01100101 00100000 01110100
+        01100001 01110011 01110100 01111001
+        00100001
     " }
 ```
 
@@ -62,7 +66,11 @@ The contents of binary files are just their bytes, as-is. These files are not hu
 ```mermaid
 flowchart LR
     A@{ shape: card, label: "**Binary File**
-        10110110 10110100 11110001 10111101 11110001 10001001 10110100 11110001 10001001 10110110 10110100 10001001 10110110 10110100 11110001 10110110 10111101 11110001
+        01000001 01110000 01110000 01101100
+        01100101 01110011 00100000 01100001
+        01110010 01100101 00100000 01110100
+        01100001 01110011 01110100 01111001
+        00100001
     " }
 ```
 
@@ -79,7 +87,39 @@ flowchart LR
 
 The contents of a text file represent characters, according to an **encoding**, like ASCII or UTF-8. These files are human-readable. Opening a text file in a text editor will result in human-readable characters, because the text editor applies the encoding, transforming the bytes into characters.
 
-![illustration of a text file](images/text-file.svg)
+```mermaid
+flowchart LR
+    A@{ shape: card, label: "**Text File**
+        01000001 01110000 01110000 01101100
+        01100101 01110011 00100000 01100001
+        01110010 01100101 00100000 01110100
+        01100001 01110011 01110100 01111001
+        00100001
+    " } --Rendered by Text Editor-->
+    B@{ shape: win-pane, label: "Apples are tasty!" }
+```
+
+##### Example Encoding
+
+|  Binary  | Text  |
+| :------: | :---: |
+| 01000001 |   A   |
+| 01110000 |   p   |
+| 01110000 |   p   |
+| 01101100 |   l   |
+| 01100101 |   e   |
+| 01110011 |   s   |
+| 00100000 | space |
+| 01100001 |   a   |
+| 01110010 |   r   |
+| 01100101 |   e   |
+| 00100000 | space |
+| 01110100 |   t   |
+| 01100001 |   a   |
+| 01110011 |   s   |
+| 01110100 |   t   |
+| 01111001 |   y   |
+| 00100001 |   !   |
 
 ##### Text File Examples
 
