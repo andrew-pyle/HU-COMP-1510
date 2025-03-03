@@ -3,7 +3,6 @@ author:
   name: Andrew Pyle
   email: apyle@harding.edu
 description: Prof. Andrew Pyle's Course Materials
-baseurl: /HU-COMP-1510/
 url: https://andrew-pyle.github.io
 remote_theme: jekyll/minima
 minima:
