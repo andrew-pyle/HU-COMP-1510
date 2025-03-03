@@ -600,9 +600,30 @@ while(pokemonFS >> line) { /* ... */ }
 
 Writing to a file will overwrite any existing file with the same name. A programmer can detect whether a given already file exists by attempting to read the file, then checking `.fail()`.
 
-#### Example
+```cpp
+// I hope this does not already exist
+const string filename = "receipt.txt";
 
-_To Do_
+ifstream does_it_exist;
+string trash_can;
+
+// Try to open the file and read a line
+does_it_exist.open(filename);
+does_it_exist >> trash_can;
+
+if (does_it_exist.fail())
+{
+    // File is empty or does not exist. It is safe to write
+    ofstream fout;
+    fout.open(filename);
+    fout << "very important data";
+    fout.close();
+}
+else
+{
+    cout << "File " << filename << " already exists!" << endl;
+}
+```
 
 ## Appendix: Example Programs
 
