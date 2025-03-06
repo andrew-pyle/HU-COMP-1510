@@ -1,6 +1,5 @@
 ---
 prev: structs
-next: classes-2
 ---
 
 # Classes
