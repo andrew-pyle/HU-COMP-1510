@@ -1,93 +1,124 @@
----
-prev: structs
----
-
 # Classes
 
-## Software Architecture
+## Illustration
 
-Until now, we've been thinking about programming in terms of syntax, logic, and language.
+## Syntax
 
-That is about to change.
+```cpp
+class Pokemon {
+    public:
+        void setNumber(int n) {
+            number = n;
+        }
+        void setName(string n) {
+            name = n;
+        }
+        void setType(string t) {
+            type = t;
+        }
+        void setCry(string c) {
+            cry = c;
+        }
 
-_Metaphor:_ If we've been learning to lay bricks, now we're going to begin to think about architecture.
+        void print_cry() {
+          cout << cry << endl;
+        }
 
-### Programming as a List of Steps
+        void launch() {
+          cout << "Go " << name << "! " << cry << endl;
+        }
 
-The following diagram represents the anatomy of most of the C++ programs we've written in this class. There is a starting point, some steps, and an end point. The entire program runs to completion.
+        void evolve() {
+            if (number == 1) {
+                number = 2;
+                name = "Ivysaur";
+                cry = "Iiiiivy-saur";
+            }
+            else if (number == 2) {
+                number = 3;
+                name = "Venusaur";
+                cry = "veeeena-saur";
+            }
+            // Add other evolutions ...
+            else {
+                cout << "No Evolution" << endl;
+            }
+        }
 
-```mermaid
-flowchart LR
-    A@{ shape: card, label: "**Imperative Paradigm**
-           _Start_
-           1. ___________
-           2. ___________
-           3. ___________
-           4. ___________
-           ...
-           N. ___________
-           _Done_
-    "}
+    private:
+        int number;
+        string name;
+        string type;
+        string cry;
+};
+
+int main() {
+    Pokemon bulbasaur;
+    bulbasaur.setNumber(1);
+    bulbasaur.setName("Bulbasaur");
+    bulbasaur.setType("Grass/Poison");
+    bulbasaur.setCry("Bulbaaa");
+
+    bulbasaur.print_cry(); // Bulbaaa
+    bulbasaur.launch();    // Go Bulbasaur! Bulbaaa
+
+    // Mutates data members
+    bulbasaur.evolve();
+
+    bulbasaur.launch(); // Go Ivysaur! Iiiiivy-saur
+}
 ```
 
-This is a useful metaphor for a computer program: A list of steps.
+## History
 
-However, this metaphor is **insufficient** to describe many processes that we'd like to represent in code. Some examples:
+C++ was designed to be an enhanced C language, and included classes as one of its core features. [Wikipedia Link](https://en.wikipedia.org/wiki/C++)
 
-1. **A video game** — The user can send input from the controller at any time, but our code can only accept keyboard input when we use `cin`.
+## Terminology
 
-   ```mermaid
-   stateDiagram-v2
-        [*] --> Ready
-        Ready --> Move : walk
-        Ready --> Move : jump
-        Move --> Ready
-        Move --> Win : Touch Trophy
-        Move --> Lose : Touch Lava
-        Win --> [*]
-        Lose --> [*]
-   ```
+### Object
 
-1. **A social network** — Many users are sending & receiving content. How would we keep track of which user needs to receive what?
+An code entity which encapsulates data and functions together.
 
-   ```mermaid
-   erDiagram
-       User ||--o{ User : "has friend"
-       User ||--o{ Post : has
-       User ||--o{ Photo : owns
-       User ||--o{ Post : "sees friend's"
-       User {
-           string name
-           string birthday
-       }
-       Post {
-           string content
-           date posted_on
-       }
-       Photo {
-           string url
-       }
+### Class
 
-   ```
+The definition of an object's data & functions. The class is a data type, like `int` or `struct`.
 
-1. **An Inventory System** — There can be many different items in a store's inventory we do not know all the properties in advance.
+### Public
 
-1. **An Operating System** — There are many different processes happening at once on a computer. How do they cooperate to share the CPU & memory?
+Public data & functions can be accessed outside the class definition.
 
-_These systems require us to think about the **architecture** or **design** of software, not just what code to write._
+### Private
 
-## Object-Oriented Programming
+Private data & functions can only be accessed within the class definition.
 
-There are different ways to think about software architecture: flow charts, diagrams, meetings, tests.
+### Public Member Function (Method)
 
-We are going to spend some time talking about one technique: **Object-Oriented Programming (OOP)**. We are going to focus on the the building blocks of OOP: classes & objects.
+A **public member function** is a function in a class which is declared `public`. It is usually called a **method**.
 
-OOP is a way of thinking about the structure of a program by imagining "lego blocks" which can snap together to create the necessary functionality.
+### Private Data Members
 
-**We will now stop thinking about programming like a list of steps. Instead, we will think about:**
+A **private data member** is a property of a class which is not accessible outside the class definition.
 
-1. What are the requirements? (From the question, or wherever)
-1. What "lego blocks" can snap together to make a system which does that?
-1. How do I write code which creates those "lego blocks"?
+### Scope Resolution Operator (`::`)
 
-## Classes & Objects
+The **scope resolution operator** distinguishes entities by the location of their definition (library, namespace, class, etc.).
+
+### Inline Member Function
+
+An **inline member function** is a function in a class definition that is within the class declaration.
+
+### Mutator
+
+A **mutator** is a method which changes the value of a class's data member. A **setter** is a subset of mutator which directly corresponds to a specific data member.
+
+### Accessor
+
+An **accessor** is a method which returns the value of a class's data member. A **getter** is a subset of accessor which directly corresponds to a specific data member. Often declared `const`.
+
+### Private Helper Function
+
+A **private helper function** is a class's function which is not accessible outside the class definition (private). It is used within the class by other public or private methods.
+
+## Usage
+
+## Example Program: ??

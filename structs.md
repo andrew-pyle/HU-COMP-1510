@@ -379,11 +379,14 @@ void launch(Pokemon &pokemon) {
 
 void evolve(Pokemon &pokemon) {
   if (pokemon.number == 1) {
-    string old_name = pokemon.name;
-
     pokemon.number = 2;
     pokemon.name = "Ivysaur";
     pokemon.cry = "Iiiiivy-saur";
+  }
+  else if (pokemon.number == 2) {
+    pokemon.number = 3;
+    pokemon.name = "Venusaur";
+    pokemon.cry = "veeeena-saur";
   }
   // Add other evolutions ...
   else {
