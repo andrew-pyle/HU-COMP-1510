@@ -113,8 +113,6 @@ int main() {
 }
 ```
 
-### To Do
-
 ## History
 
 `struct`s come from the C programming language. `struct`s in C++ can often be used with C code.
@@ -223,7 +221,7 @@ int main()
 
 ```
 
-### `struct`s can Contain Other `structs`
+### `struct`s Can Contain Other `structs`
 
 The attributes of a `struct` can be any type, including other `struct`s. This is called **nested** structs.
 
@@ -251,7 +249,10 @@ int main() {
 
 ## Structs & Vectors
 
-`structs` and vectors can be used together in two main ways.
+`structs` and vectors can be used together in two main ways:
+
+1. A vector of `struct1s
+1. A struct with a `vector` attribute
 
 ### Vector of `struct`s
 
@@ -279,8 +280,7 @@ int main() {
   // Prints "Go Caterpie! cater-cater"
   cout << "Go "
        << trainer_team.at(1).name << "! "
-       << trainer_team.at(1).cry
-       << endl;
+       << trainer_team.at(1).cry << endl;
 }
 ```
 
@@ -289,6 +289,7 @@ int main() {
 `struct`s can have attributes which are themselves a vector of something.
 
 ```cpp
+
 struct Pokemon {
   string name;
   string type;
@@ -298,8 +299,7 @@ struct Pokemon {
 void print_pokemon(Pokemon &pokemon) {
   cout << pokemon.name << " — " << pokemon.type << endl;
   cout << "Moves:" << endl;
-  for (int i = 0; i < pokemon.moves.size(); ++i)
-  {
+  for (int i = 0; i < pokemon.moves.size(); ++i) {
     cout << '\t' << i + 1 << ") " << pokemon.moves.at(i) << endl;
   }
 }
@@ -313,8 +313,14 @@ int main() {
   weedle.moves.push_back("poison sting");
   weedle.moves.push_back("bug bite");
 
+  // Or use Aggregate Initialization
+  Pokemon caterpie = {
+      "Caterpie", "Bug", {"tackle", "string shot", "bug bite"}};
+
   // Print formatted Pokemon
   print_pokemon(weedle);
+  cout << endl;
+  print_pokemon(caterpie);
 }
 ```
 
@@ -327,4 +333,10 @@ Moves:
         2) string shot
         3) poison sting
         4) bug bite
+
+Caterpie — Bug
+Moves:
+        1) tackle
+        2) string shot
+        3) bug bite
 ```
