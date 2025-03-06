@@ -1,6 +1,7 @@
 ---
 layout: page
 prev: files
+next: classes
 ---
 
 # Structs
@@ -28,58 +29,12 @@ struct Pokemon {
     string name;
     string type;
     string cry;
-}
-```
-
-## Overview
-
-```cpp
-#include <iostream>
-
-// Definition
-
-struct Pokemon {
-  int number;
-  string name;
-  string type;
-  string cry;
 };
 
-// Functions
-
-// Functions Can pass struct by value
-void print_cry(Pokemon pokemon) {
-  cout << pokemon.cry << endl;
-}
-
-// Functions Can pass struct by reference, too
-void evolve(Pokemon &pokemon) {
-  if (pokemon.number == 2) {
-    pokemon.number = 3;
-    pokemon.name = "Venusaur";
-    pokemon.type = "Grass/Poison";
-    pokemon.cry = "veeeena-saur";
-  }
-  // ...
-}
-
-// Functions can return a struct
-Pokemon ivysaur_factory() {
-  Pokemon evolution = {2, "Ivysaur", "Grass/Poison", "Iiiiivy-saur"};
-  return evolution;
-}
-
-// Main
-
-int main() {
   // Declare a Pokemon struct
-  Pokemon pikachu;
 
-  // Access Operator
-  pikachu.name = "Pikachu";     // Assign to data member
-  cout << pikachu.name << endl; // Read data member
 
-  // Create a Pokemon via assignment
+  // Create a Pokemon via Declaration, then Assignment
   Pokemon bulbasaur;
   bulbasaur.number = 1;
   bulbasaur.name = "Bulbasaur";
@@ -87,30 +42,14 @@ int main() {
   bulbasaur.cry = "Bulbaaa";
 
   // Create a Pokemon via Initialization
-  Pokemon charmander = {
-      // The order of the values in the Initializer list matches the declaration
-      2,
-      "Charmander",
-      "Grass/Poison",
-      "Bulbaaa"};
+  Pokemon charmander = {4, "Charmander", "Fire", "char-char"};
 
-  // Copy a struct
 
-  // Assignment copies the entire struct
-  Pokemon another_charmander = charmander;
+  // Access Operator (.)
+  Pokemon pikachu;
+  pikachu.name = "Pikachu";     // Assign to data member
+  cout << pikachu.name << endl; // Read data member
 
-  // Each data member could be copied individually, also.
-  Pokemon another_bulbasaur;
-  another_bulbasaur.number = bulbasaur.number;
-  another_bulbasaur.name = bulbasaur.name;
-  another_bulbasaur.type = bulbasaur.type;
-  another_bulbasaur.cry = bulbasaur.cry;
-
-  // Use functions
-  Pokemon ivysaur = ivysaur_factory();
-  evolve(ivysaur);    // Mutated its attributes
-  print_cry(ivysaur); // Prints "veeeena-saur"
-}
 ```
 
 ## History
@@ -197,6 +136,74 @@ int main() {
 ```
 
 ## Usage
+
+### Copy a `struct`
+
+`struct`s can be copied via assignment. There are two techniques for copying structs:
+
+1. Copy the entire struct
+1. Copy one attribute of the struct
+
+#### Copy the entire struct
+
+```cpp
+Pokemon charmander = {4, "Charmander", "Fire", "char-char"};
+
+// This assignment copies all attributes
+Pokemon another_charmander = charmander;
+
+cout << another_charmander.type << endl; // Prints "Fire"
+```
+
+#### Copy One Attribute
+
+```cpp
+Pokemon bulbasaur = {1, "Bulbasaur", "Grass/Poison", "bulbaaa"};
+
+// Declare another struct
+Pokemon another_bulbasaur;
+
+// One data member is copied with each assignment to the new struct
+another_bulbasaur.number = bulbasaur.number;
+another_bulbasaur.name = bulbasaur.name;
+another_bulbasaur.type = bulbasaur.type;
+another_bulbasaur.cry = bulbasaur.cry;
+
+cout << another_bulbasaur.type << endl; // Prints "Grass/Poison"
+```
+
+### Functions
+
+#### `structs` can be passed by value
+
+```cpp
+void print_cry(Pokemon pokemon) {
+  cout << pokemon.cry << endl;
+}
+```
+
+#### `structs` can be passed by reference, too
+
+```cpp
+void evolve(Pokemon &pokemon) {
+  if (pokemon.number == 2) {
+    pokemon.number = 3;
+    pokemon.name = "Venusaur";
+    pokemon.type = "Grass/Poison";
+    pokemon.cry = "veeeena-saur";
+  }
+  // ...
+}
+```
+
+#### Functions can return a `struct`
+
+```cpp
+Pokemon ivysaur_factory(string name) {
+  Pokemon evolution = {2, name, "Grass/Poison", "Iiiiivy-saur"};
+  return evolution;
+}
+```
 
 ### Output
 
@@ -339,4 +346,74 @@ Moves:
         1) tackle
         2) string shot
         3) bug bite
+```
+
+## Example Program: Pokémon Team
+
+1. Create a team of Pokémon
+1. "Launch" each Pokémon in the team
+1. Evolve some Pokémon
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+// Definition
+
+struct Pokemon {
+  int number;
+  string name;
+  string type;
+  string cry;
+};
+
+// Functions
+
+void launch(Pokemon &pokemon) {
+  cout << "Go "
+       << pokemon.name << "! "
+       << pokemon.cry << endl;
+}
+
+void evolve(Pokemon &pokemon) {
+  if (pokemon.number == 1) {
+    string old_name = pokemon.name;
+
+    pokemon.number = 2;
+    pokemon.name = "Ivysaur";
+    pokemon.cry = "Iiiiivy-saur";
+  }
+  // Add other evolutions ...
+  else {
+    cout << "No Evolution" << endl;
+  }
+}
+
+Pokemon ivysaur_factory(string name) {
+  Pokemon evolution = {2, name, "Grass/Poison", "Iiiiivy-saur"};
+  return evolution;
+}
+
+// Main
+
+int main() {
+  vector<Pokemon> team;
+
+  Pokemon bulbasaur = {1, "Bulbasaur", "Grass/Poison", "Bulbaaa"};
+  Pokemon ivysaur = ivysaur_factory("Ralph");
+  Pokemon weedle = {13, "Weedle", "Bug/Poison", "dllllllll"};
+
+  team.push_back(bulbasaur);
+  team.push_back(ivysaur);
+  team.push_back(weedle);
+
+  for (auto p : team) {
+    launch(p);
+  }
+
+  evolve(bulbasaur);             // Mutated its attributes
+  cout << bulbasaur.cry << endl; // Prints "Iiiiivy-saur"
+}
 ```
