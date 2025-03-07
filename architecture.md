@@ -1,6 +1,7 @@
 ---
-prev: structs
-next: classes
+layout: page
+prev: files
+next: structs
 ---
 
 # Software Architecture
