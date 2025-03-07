@@ -1,6 +1,6 @@
 ---
 layout: page
-prev: files
+prev: architecture
 next: classes
 ---
 
