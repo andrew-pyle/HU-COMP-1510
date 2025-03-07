@@ -1,3 +1,8 @@
+---
+layout: page
+prev: structs
+---
+
 # Classes
 
 ## Illustration
