@@ -1,7 +1,7 @@
 ---
 layout: page
 prev: streams
-next: structs
+next: architecture
 ---
 
 # File Input/Output
