@@ -185,6 +185,7 @@ void print_cry(Pokemon pokemon) {
 #### `structs` can be passed by reference, too
 
 ```cpp
+// Mutate the provided Pokemon struct based on its number
 void evolve(Pokemon &pokemon) {
   if (pokemon.number == 2) {
     pokemon.number = 3;
@@ -199,9 +200,10 @@ void evolve(Pokemon &pokemon) {
 #### Functions can return a `struct`
 
 ```cpp
-Pokemon ivysaur_factory(string name) {
-  Pokemon evolution = {2, name, "Grass/Poison", "Iiiiivy-saur"};
-  return evolution;
+// Creates an Ivysaur with a nickname
+Pokemon ivysaur_factory(string nickname) {
+  Pokemon ivysaur = {2, nickname, "Grass/Poison", "Iiiiivy-saur"};
+  return ivysaur;
 }
 ```
 
@@ -258,7 +260,7 @@ int main() {
 
 `structs` and vectors can be used together in two main ways:
 
-1. A vector of `struct1s
+1. A vector of `struct`s
 1. A struct with a `vector` attribute
 
 ### Vector of `struct`s
